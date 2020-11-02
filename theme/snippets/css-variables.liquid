@@ -1,0 +1,104 @@
+
+{% comment %}
+{#<link rel="dns-prefetch" href="https://cdn.shopify.com">#}
+{#<link rel="preload" href="{{'National-Light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin="anonymous">#}
+{#<link rel="preload" href="{{'National-Light.woff' | asset_url }}" as="font" type="font/woff2" crossorigin="anonymous">#}
+{% endcomment %}
+
+<style type="text/css">
+
+  {%- assign font_body_bold = settings.font_body | font_modify: 'weight', '700' -%}
+  {%- assign font_body_medium = settings.font_body | font_modify: 'weight', '500' -%}
+  {%- assign font_body_light = settings.font_body | font_modify: 'weight', '300' -%}
+
+  {%- assign font_body_bold_italic = font_body_bold | font_modify: 'style', 'italic' -%}
+  {%- assign font_body_medium_italic = font_body_medium | font_modify: 'style', 'italic' -%}
+  {%- assign font_body_light_italic = font_body_light | font_modify: 'style', 'italic' -%}
+
+  {%- comment -%}
+      {#{{ settings.font_heading | font_face }}#}
+      {#{{ settings.font_body | font_face }}#}
+      {#{{ font_body_bold | font_face }}#}
+      {#{{ font_body_bold_italic | font_face }}#}
+      {#{{ font_body_medium | font_face }}#}
+      {#{{ font_body_medium_italic | font_face }}#}
+      {#{{ font_body_light | font_face }}#}
+      {#{{ font_body_light_italic | font_face }}#}
+  {%- endcomment -%}
+
+  @font-face {
+      font-family: "National";
+      src: local('National Light'), local('National-Light'),
+            url({{'National-Light.woff2' | asset_url }}) format("woff2"),
+            url({{'National-Light.woff' | asset_url }}) format("woff");
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+  }
+  @font-face {
+      font-family: "National";
+      src: local('National Semibold'), local('National-Semibold'),
+           url({{'National-Semibold.woff2' | asset_url }}) format("woff2"),
+           url({{'National-Semibold.woff' | asset_url }}) format("woff");
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+  }
+
+  {% assign mainBgColor = settings.color_main_bg | color_to_hex  %}
+  {% assign mainAccentColor = settings.color_header_shadow %}
+
+  {% if product and product.metafields.custom_fields["theme_color"] != blank %}
+  /* is  product */
+    {% assign mainAccentColor = product.metafields.custom_fields["theme_color"] %}
+  {% endif %}
+
+  {% if collection and collection.metafields.custom_fields["theme_color"] != blank %}
+  /* is  collection */
+    {% assign mainAccentColor = collection.metafields.custom_fields["theme_color"] %}
+  {% endif %}
+
+  {% if page and page.metafields.custom_fields["theme_color"] != blank %}
+  /* is  page */
+    {% assign mainAccentColor = page.metafields.custom_fields["theme_color"] %}
+  {% endif %}
+
+  {% if page and page.metafields.custom_fields["main_bg"] != blank %}
+  /* is  page */
+    {% assign mainBgColor = page.metafields.custom_fields["main_bg"] | color_to_hex  %}
+  {% endif %}
+
+  {% if blog and blog.metafields.custom_fields["theme_color"] != blank %}
+  /* is  blog */
+    {% assign mainAccentColor = blog.metafields.custom_fields["theme_color"] %}
+  {% endif %}
+
+  {% if blog and blog.metafields.custom_fields["main_bg"] != blank %}
+    /* is  blog */
+    {% assign mainBgColor = blog.metafields.custom_fields["main_bg"] | color_to_hex  %}
+  {% endif %}
+
+  {% assign textBody = settings.color_body_text | color_to_hex  %}
+  {% assign textBodyStatic = textBody  %}
+  {% if textBody == mainBgColor %}
+    {% assign textBody = '#ffffff' | color_to_hex %}
+  {% endif %}
+
+  :root {
+    --color-brand: {{ settings.color_brand }};
+    --color-body-text: {{ textBody }};
+    --color-body-text-lighter: {{ settings.color_body_text | color_lighten: 28  }};
+    --color-main-background: {{ mainBgColor }};
+    --color-main-background-static: {{ settings.color_main_bg }};
+    --color-body-text-static: {{ textBodyStatic }};
+    --color-border: {{ settings.color_body_text | color_lighten: 50 }};
+    --color-header-shadow: {{ mainAccentColor }};
+    --color-theme-accent: {{ mainAccentColor }};
+
+    --font-heading: 'National', {{ settings.font_heading.fallback_families }};
+    --font-body: 'National', {{ settings.font_body.fallback_families }};
+    --font-body-weight: {{ settings.font_body.weight }};
+    --font-body-style: {{ settings.font_body.style }};
+    --font-body-bold-weight: {{ font_body_bold.weight | default: 'bold' }};
+  }
+</style>

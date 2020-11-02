@@ -1,0 +1,9 @@
+.header {
+    background: black !important;
+    color: white;
+    padding: 3rem;
+
+    &__fixed {
+        background: tomato;
+    }
+}

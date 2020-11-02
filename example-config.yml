@@ -1,0 +1,13 @@
+development:
+  password: put_store_app_password_here
+  theme_id: "put_dev-theme_id_here"
+  store: put_store_uri_here
+  ignore_files:
+      - config/settings_data.json
+
+test:
+  password: put_store_app_password_here
+  theme_id: "put_test-theme_id_here"
+  store: put_store_uri_here
+  ignore_files:
+      - config/settings_data.json
