@@ -9,11 +9,9 @@
     "watch": "webpack --watch && theme watch --notify=theme-ready.tmp --dir=theme",
     "watch:assets": "webpack --watch",
     "watch:theme": "theme watch --notify=theme-ready.tmp --dir=theme --allow-live",
-
     "deploy:test": "webpack -p && theme deploy --env=test --dir=theme",
     "watch:test": "webpack --watch && theme watch --notify=theme-ready.tmp --env=test --dir=theme",
     "watch:theme:test": "theme watch --notify=theme-ready.tmp --env=test --dir=theme --allow-live",
-
     "prod:build": "NODE_ENV=production webpack -p",
     "prod:deploy": "NODE_ENV=production webpack -p && theme deploy --env=production --dir=theme"
   },
